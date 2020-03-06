@@ -13,5 +13,6 @@
         src: '{{ local_source_directory }}/fuse-overlayfs/fuse-overlayfs'
         dest: /usr/bin/fuse-overlayfs
         mode: 0755
+        remote_src: yes
   become: '{{ do_become }}'
   tags: [fuse-overlayfs, packages]
