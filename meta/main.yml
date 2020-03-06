@@ -1,0 +1,8 @@
+---
+
+dependencies:
+  - role: github
+    tags: [fuse-overlayfs, dependencies]
+
+  - role: local-source
+    tags: [fuse-overlayfs, dependencies]

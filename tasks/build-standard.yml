@@ -1,0 +1,27 @@
+---
+
+- block:
+    - name: Generate fuse-overlayfs build configuration
+      command:
+        ./autogen.sh
+      args:
+        chdir: '{{ local_source_directory }}/fuse-overlayfs'
+
+    - name: Configure fuse-overlayfs build process
+      command:
+        ./configure {{ fuse_overlayfs_build_cfg }}
+      args:
+        chdir: '{{ local_source_directory }}/fuse-overlayfs'
+
+    - name: Build fuse-overlayfs from source
+      make:
+        chdir: '{{ local_source_directory }}/fuse-overlayfs'
+        params:
+          '--jobs': '{{ ansible_processor_cores }}'
+
+    - name: Install fuse-overlayfs from source
+      make:
+        chdir: '{{ local_source_directory }}/fuse-overlayfs'
+        target: install
+  become: '{{ do_become }}'
+  tags: [fuse-overlayfs, packages]

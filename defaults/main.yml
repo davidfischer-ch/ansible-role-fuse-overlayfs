@@ -1,0 +1,21 @@
+do_become: yes
+
+fuse_overlayfs_build_cfg: ''
+fuse_overlayfs_build_packages:
+  container:
+    - fuse2fs
+  standard:
+    - autoconf
+    - automake
+    - clang
+    - g++
+    - gcc
+    - libc6-dev
+    - libfuse3-dev
+    - libfuse3
+    - make
+    - pkgconf
+
+fuse_overlayfs_repository_url: https://github.com/containers/fuse-overlayfs.git
+
+# fuse_overlayfs_version: v0.7.7

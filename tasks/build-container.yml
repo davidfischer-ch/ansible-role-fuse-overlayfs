@@ -1,0 +1,17 @@
+---
+
+- block:
+    - name: Compile inside a container with buildah
+      command: >
+        buildah bud -v '{{ local_source_directory }}/fuse-overlayfs:/build/fuse-overlayfs'
+        -t fuse-overlayfs -f ./Dockerfile.static.ubuntu .
+      args:
+        chdir: '{{ local_source_directory }}/fuse-overlayfs'
+
+    - name: Copy fuse-overlayfs from source
+      copy:
+        src: '{{ local_source_directory }}/fuse-overlayfs/fuse-overlayfs'
+        dest: /usr/bin/fuse-overlayfs
+        mode: 0755
+  become: '{{ do_become }}'
+  tags: [fuse-overlayfs, packages]
