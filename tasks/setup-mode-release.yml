@@ -1,0 +1,8 @@
+---
+
+- name: Install Fuse OverlayFS packages
+  package:
+    name: '{{ fuse_overlayfs_packages }}'
+    state: present
+  become: '{{ do_become }}'
+  tags: [fuse-overlayfs, packages] # FIXME Remove when this is fixed https://github.com/ansible/ansible/issues/30882

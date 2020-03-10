@@ -1,0 +1,43 @@
+---
+
+- block:
+    - name: Install fuse-overlayfs build packages
+      package:
+        name: '{{ fuse_overlayfs_build_packages[fuse_overlayfs_build_mode] }}'
+        state: present
+      become: '{{ do_become }}'
+
+    - name: Clone fuse-overlayfs source code
+      git:
+        repo: '{{ fuse_overlayfs_repository_url }}'
+        dest: '{{ local_source_directory }}/fuse-overlayfs'
+        force: yes
+        version: '{{ fuse_overlayfs_version }}'
+      register: _fuse_overlayfs_git
+
+    - name: Set fuse-overlayfs build environment
+      set_fact:
+        fuse_overlayfs_build_env: >
+          {{ fuse_overlayfs_build_mode }}
+          {{ fuse_overlayfs_build_cfg }}
+          {{ _fuse_overlayfs_git.after }}
+
+    - name: Detect if fuse-overlayfs must be reinstalled
+      command:
+        cat '{{ local_source_directory }}/fuse-overlayfs.build.cfg'
+      changed_when: >
+        fuse_overlayfs_build_env|trim != fuse_overlayfs_build.stdout|default('')|trim
+      check_mode: no
+      failed_when: no
+      register: fuse_overlayfs_build
+
+    - block:
+        - include_tasks: build-{{ fuse_overlayfs_build_mode }}.yml
+
+        - name: Save build environment
+          copy:
+            content: '{{ fuse_overlayfs_build_env }}'
+            dest: '{{ local_source_directory }}/fuse-overlayfs.build.cfg'
+      when: fuse_overlayfs_build is change
+  become: '{{ do_become }}'
+  tags: [fuse-overlayfs, packages] # FIXME Remove when this is fixed https://github.com/ansible/ansible/issues/30882

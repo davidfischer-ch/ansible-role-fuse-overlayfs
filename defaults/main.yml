@@ -16,6 +16,11 @@ fuse_overlayfs_build_packages:
     - make
     - pkgconf
 
+fuse_overlayfs_packages:
+    - fuse-overlayfs
+
 fuse_overlayfs_repository_url: https://github.com/containers/fuse-overlayfs.git
+
+fuse_overlayfs_setup_mode: source
 
 # fuse_overlayfs_version: v0.7.7
