@@ -17,6 +17,8 @@ TODO VARIABLES
 
 ### Playbook
 
+Install from source:
+
 ```
 ---
 
@@ -27,6 +29,19 @@ TODO VARIABLES
   vars:
     fuse_overlayfs_build_mode: container
     fuse_overlayfs_version: v0.7.7
+```
+
+Install from a release:
+
+```
+---
+
+- hosts: localhost
+  roles:
+    - buildah
+    - fuse-overlayfs
+  vars:
+    fuse_overlayfs_setup_mode: release
 ```
 
 ## License
