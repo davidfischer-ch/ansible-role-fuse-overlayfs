@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.1.0
+
+### Minor compatibility breaks
+
+- Compatible with FUSE OverlayFS 1.2+
+
 ## v1.0.2
 
 ### Fix and enhancements
