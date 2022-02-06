@@ -1,9 +1,9 @@
-# Ansible Role fuse-overlayfs
+# Ansible Role FUSE OverlayFS
 
 Library of Ansible plugins and roles for deploying various services.
 See [ansible-roles](https://github.com/davidfischer-ch/ansible-roles) for additional documentation.
 
-This repository hosts the role fuse-overlayfs and may depend of other roles and plugins of the library.
+This repository hosts the role FUSE OverlayFS and may depend of other roles and plugins of the library.
 
 ## Dependencies
 
